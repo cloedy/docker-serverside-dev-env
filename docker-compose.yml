@@ -16,14 +16,14 @@ services:
         build:
             context: ./mysql
         image: ${CURRENT_DB_IMG}
-        command: --default-authentication-plugin=caching_sha2_password
+        command: --default-authentication-plugin=mysql_native_password
         ports:
             - ${HOST_DB_PORT}:3306
         environment:
-            MYSQL_ROOT_PASSWORD: vapor
-            MYSQL_DATABASE: apns
-            MYSQL_USER: vapor
-            MYSQL_PASSWORD: vapor
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_NAME}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
         networks:
             - bx-net
 
