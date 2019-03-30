@@ -28,7 +28,8 @@ RUN apt-get update && \
 # Install composer
 COPY ./install-composer.sh /tmp
 RUN chmod +x /tmp/install-composer.sh \
-        && /tmp/install-composer.sh --install-dir=/usr/local/bin --filename=composer \
+        && /tmp/install-composer.sh --install-dir=/usr/local/bin \
+        && mv /usr/local/bin/composer.phar /usr/local/bin/composer \
         && mkdir /run/php
 
 # Delete default php-fpm config
