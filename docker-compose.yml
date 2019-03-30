@@ -13,17 +13,37 @@ services:
             - bx-net
 
     mysql:
-        build:
-            context: ./mysql
         image: ${CURRENT_DB_IMG}
         command: --default-authentication-plugin=mysql_native_password
         ports:
             - ${HOST_DB_PORT}:3306
+        volumes:
+            - ${HOST_DB_ROOT}:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${DB_NAME}
             MYSQL_USER: ${DB_USER}
             MYSQL_PASSWORD: ${DB_PASSWORD}
+        networks:
+            - bx-net
+
+    redis:
+        build:
+            context: ./redis
+        image: ${CURRENT_REDIS_IMG}
+        ports:
+            - ${HOST_REDIS_PORT}:6379 # debugging only
+        networks:
+            - bx-net
+
+    echo:
+        build:
+            context: ./echo-server
+        image: ${CURRENT_ECHO_IMG}
+        # We comment out the port because we forward the request
+        # to echo by Nginx internally.
+        #ports:
+        #    - ${HOST_ECHO_PORT}:6001 # debugging only
         networks:
             - bx-net
 

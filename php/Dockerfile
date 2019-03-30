@@ -11,13 +11,18 @@ RUN apt-get update && \
         libpng-dev \
         libzip-dev \
         libbz2-dev \
+        libcurl4-openssl-dev \
         php7.2 \
         php7.2-fpm \
         php-mysql \
         php-xdebug \
+        php-curl \
         wget \
+        curl \
         net-tools \
         cron \
+        redis \
+        screen \
         && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install composer
@@ -34,8 +39,11 @@ RUN echo 'listen = php:9000' >> /etc/php/7.2/fpm/pool.d/www.conf \
     && echo 'date.timezone = Asia/Shanghai' >> /etc/php/7.2/fpm/php.ini \
     && echo 'display_errors = stderr' >> /etc/php/7.2/fpm/php.ini
 
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 # XDebug config
 COPY ./xdebug.ini /etc/php/7.2/mods-available/
 
-CMD ["php-fpm7.2", "-F"]
+ENTRYPOINT ["php-fpm7.2"]
+CMD ["-F"]
 

@@ -1,8 +1,8 @@
 server {
     listen 80;
-    server_name apn.boxue.io;
+    server_name dev.boxue.io;
 
-    root /var/www/apn/current/public;
+    root /var/www/boxue/current/public;
 
     index index.html index.htm index.php;
     charset utf-8;
@@ -12,7 +12,7 @@ server {
     add_header X-Content-Type-Options "nosniff";
 
     location / {
-        try_files $uri $uri/ /index.php$query_string;
+        try_files $uri $uri/ /index.php$is_args$query_string;
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
@@ -25,6 +25,16 @@ server {
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
+    }
+
+    location /socket.io {
+        access_log /tmp/srv_socket.log;
+        proxy_pass http://echo:6001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
     }
 
     location ~ /\.(?!well-known).* {

@@ -10,9 +10,6 @@ services:
         volumes:
             - ${HOST_ROOT}:${CONTAINER_ROOT}
         working_dir: ${CONTAINER_ROOT}
-        environment:
-            XDEBUG_CONFIG: "remote_host=docker.for.mac.host.internal remote_port=9001"
-            PHP_IDE_CONFIG: "serverName=APN-demo"
         tty: true
         networks:
             - bx-net
