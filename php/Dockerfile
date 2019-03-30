@@ -27,7 +27,10 @@ RUN apt-get update && \
 
 # Install composer
 COPY ./install-composer.sh /tmp
-RUN chmod +x /tmp/install-composer.sh && /tmp/install-composer.sh && mkdir /run/php
+RUN chmod +x /tmp/install-composer.sh \
+        && /tmp/install-composer.sh --install-dir=/usr/local/bin \
+        && mv /usr/local/bin/composer.phar /usr/local/bin/composer \
+        && mkdir /run/php
 
 # Delete default php-fpm config
 RUN sed -i '/listen = \/run\/php\/php7\.2-fpm\.sock/d' /etc/php/7.2/fpm/pool.d/www.conf \
