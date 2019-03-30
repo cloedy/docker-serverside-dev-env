@@ -15,6 +15,8 @@ RUN apt-get update && \
         php7.2 \
         php7.2-fpm \
         php7.2-mbstring \
+        php7.2-zip \
+        php7.2-xml \
         php-mysql \
         php-xdebug \
         php-curl \
