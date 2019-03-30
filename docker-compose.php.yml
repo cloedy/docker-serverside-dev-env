@@ -9,6 +9,7 @@ services:
             - 9000:9000
         volumes:
             - ${HOST_ROOT}:${CONTAINER_ROOT}
+            - ${HOST_STORAGE_ROOT}:${CONTAINER_STORAGE_ROOT}
         working_dir: ${CONTAINER_ROOT}
         tty: true
         networks:
