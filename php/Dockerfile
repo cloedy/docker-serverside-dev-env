@@ -14,6 +14,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         php7.2 \
         php7.2-fpm \
+        php7.2-mbstring \
         php-mysql \
         php-xdebug \
         php-curl \
