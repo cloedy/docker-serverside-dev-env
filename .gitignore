@@ -1,5 +1,7 @@
 projects/*
 db/*
-db-boxue/*
+db-*/
 .env
+apn.env
+bx.env
 

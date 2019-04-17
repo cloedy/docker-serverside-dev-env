@@ -13,6 +13,8 @@ services:
             - bx-net
 
     mysql:
+        build:
+            context: ./mysql
         image: ${CURRENT_DB_IMG}
         command: --default-authentication-plugin=mysql_native_password
         ports:
@@ -24,6 +26,7 @@ services:
             MYSQL_DATABASE: ${DB_NAME}
             MYSQL_USER: ${DB_USER}
             MYSQL_PASSWORD: ${DB_PASSWORD}
+            TZ: Asia/Shanghai
         networks:
             - bx-net
 

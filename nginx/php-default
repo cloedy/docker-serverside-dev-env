@@ -1,8 +1,8 @@
 server {
     listen 80;
-    server_name dev.boxue.io;
+    server_name apn.boxue.io;
 
-    root /var/www/boxue/current/public;
+    root /var/www/push-notifications/current/public;
 
     index index.html index.htm index.php;
     charset utf-8;
