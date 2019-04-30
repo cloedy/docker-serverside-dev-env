@@ -17,11 +17,13 @@ RUN apt-get update && \
         php7.2-mbstring \
         php7.2-zip \
         php7.2-xml \
+        php7.2-sqlite3 \
         php-mysql \
         php-xdebug \
         php-curl \
         wget \
         curl \
+        sqlite3 \
         net-tools \
         cron \
         redis \
