@@ -1,5 +1,5 @@
 {
-	"authHost": "php",
+	"authHost": "http://nginx",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [{
         "appId": "apn-provider",
