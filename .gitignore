@@ -5,4 +5,6 @@ db-*/
 *.bak
 apn.env
 bx.env
+*.crt
+*.key
 

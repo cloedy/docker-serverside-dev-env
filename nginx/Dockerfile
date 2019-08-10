@@ -11,16 +11,21 @@ RUN apt-get update && \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
         && mkdir -p /etc/nginx/ssl
 
-ADD php-default /etc/nginx/sites-available/default
-COPY apn.boxue.io* /etc/nginx/ssl/
-# COPY apn.boxue.io.key /etx/nginx/ssl
+ADD apn/apn.boxue.io /etc/nginx/sites-available/apn.boxue.io
+COPY apn/apn.boxue.io* /etc/nginx/ssl/
+ADD boxue/dev.boxue.io /etc/nginx/sites-available/dev.boxue.io
+COPY boxue/dev.boxue.io* /etc/nginx/ssl/
 
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+RUN ln -sf /etc/nginx/sites-available/apn.boxue.io /etc/nginx/sites-enabled/apn.boxue.io && \
+    ln -sf /etc/nginx/sites-available/dev.boxue.io /etc/nginx/sites-enabled/dev.boxue.io && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mkdir -p /var/www/push-notifications/current && \
-    chown www-data:www-data /var/www/push-notifications/current
+    chown www-data:www-data /var/www/push-notifications/current && \
+    mkdir -p /var/www/boxue/current && \
+    chown www-data:www-data /var/www/boxue/current
 
 CMD ["nginx"]
 
